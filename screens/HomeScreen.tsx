@@ -12,6 +12,7 @@ export default function HomeScreen({ navigation }: any) {
   const [input, setInput] = useState("");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [error, setError] = useState("");
+  const [loadingActivity, setLoadingActivity] = useState(false);
 
   function addTask() {
     if (input.trim() === "") {
@@ -26,6 +27,28 @@ export default function HomeScreen({ navigation }: any) {
     };
     setTasks([...tasks, newTask]);
     setInput("");
+  }
+
+  async function addRandomTask() {
+    try {
+      setLoadingActivity(true);
+      setError("");
+
+      const response = await fetch("https://bored-api.appbrewery.com/random");
+      const data = await response.json();
+
+      const newTask: Task = {
+        id: Date.now().toString(),
+        text: data.activity,
+        completed: false,
+      };
+
+      setTasks([...tasks, newTask]);
+    } catch {
+      setError("Unable to load a random task.");
+    } finally {
+      setLoadingActivity(false);
+    }
   }
 
   function toggleTask(id: string) {
@@ -64,6 +87,16 @@ export default function HomeScreen({ navigation }: any) {
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
         <Pressable style={styles.button} onPress={addTask}>
           <Text style={styles.buttonText}>Add Task</Text>
+        </Pressable>
+
+        <Pressable
+          style={[styles.button, styles.randomButton]}
+          onPress={addRandomTask}
+          disabled={loadingActivity}
+        >
+          <Text style={styles.buttonText}>
+            {loadingActivity ? "Loading..." : "Add Random Task"}
+          </Text>
         </Pressable>
       </View>
 
@@ -131,6 +164,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     marginBottom: 12,
+  },
+  randomButton: {
+    backgroundColor: "#326273",
+    marginBottom: 0,
   },
   buttonText: {
     color: "#ffffff",
