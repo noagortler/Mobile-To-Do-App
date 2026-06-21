@@ -1,5 +1,6 @@
 import { View, Text, Pressable, StyleSheet, TextInput, ScrollView } from "react-native";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import TaskCard from "../components/TaskCard";
 
 type Task = {
@@ -14,6 +15,30 @@ export default function HomeScreen({ navigation }: any) {
   const [error, setError] = useState("");
   const [loadingActivity, setLoadingActivity] = useState(false);
 
+  async function saveTasks(updatedTasks: Task[]) {
+    try {
+      await AsyncStorage.setItem("tasks", JSON.stringify(updatedTasks));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function loadTasks() {
+    try {
+      const savedTasks = await AsyncStorage.getItem("tasks");
+
+      if (savedTasks) {
+        setTasks(JSON.parse(savedTasks));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
+
   function addTask() {
     if (input.trim() === "") {
       setError("Please write something before adding a task.");
@@ -25,7 +50,9 @@ export default function HomeScreen({ navigation }: any) {
       text: input.trim(),
       completed: false,
     };
-    setTasks([...tasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks);
     setInput("");
   }
 
@@ -43,7 +70,9 @@ export default function HomeScreen({ navigation }: any) {
         completed: false,
       };
 
-      setTasks([...tasks, newTask]);
+      const updatedTasks = [...tasks, newTask];
+      setTasks(updatedTasks);
+      saveTasks(updatedTasks);
     } catch {
       setError("Unable to load a random task.");
     } finally {
@@ -52,15 +81,17 @@ export default function HomeScreen({ navigation }: any) {
   }
 
   function toggleTask(id: string) {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
+    const updatedTasks = tasks.map((task) =>
+      task.id === id ? { ...task, completed: !task.completed } : task
     );
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks);
   }
 
   function deleteTask(id: string) {
-    setTasks(tasks.filter((task) => task.id !== id));
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+    saveTasks(updatedTasks);
   }
 
   return (
