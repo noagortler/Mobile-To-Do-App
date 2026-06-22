@@ -97,6 +97,7 @@ export default function HomeScreen({ navigation }: any) {
 
   return (
     <View style={styles.container}>
+
       <View style={styles.header}>
         <View>
           <Text style={styles.title}>My To-Do List</Text>
@@ -125,6 +126,13 @@ export default function HomeScreen({ navigation }: any) {
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
         <Pressable style={styles.button} onPress={addTask}>
           <Text style={styles.buttonText}>Add Task</Text>
+        </Pressable>
+
+        <Pressable
+          style={styles.button}
+          onPress={() => navigation.navigate("LogTime")}
+        >
+          <Text style={styles.buttonText}>Log Time</Text>
         </Pressable>
 
         <Pressable
@@ -166,6 +174,15 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginBottom: 20,
   },
+  aboutButton: {
+    backgroundColor: "#326273",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 999,
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 44,
+  },
   title: {
     fontSize: 28,
     fontWeight: "bold",
@@ -175,15 +192,6 @@ const styles = StyleSheet.create({
   summary: {
     fontSize: 13,
     color: "#326273",
-  },
-  aboutButton: {
-    backgroundColor: "#326273",
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 999,
-    alignItems: "center",
-    justifyContent: "center",
-    minHeight: 44,
   },
   sectionTitle: {
     fontSize: 13,

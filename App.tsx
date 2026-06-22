@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "./screens/HomeScreen";
 import AboutScreen from "./screens/AboutScreen";
+import LogTimeScreen from "./screens/LogTimeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,11 @@ export default function App() {
         <Stack.Screen
           name="About"
           component={AboutScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="LogTime"
+          component={LogTimeScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
