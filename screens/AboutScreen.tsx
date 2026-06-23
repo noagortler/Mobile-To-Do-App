@@ -25,12 +25,13 @@ export default function AboutScreen({ navigation }: any) {
           <View style={styles.dot} />
           <Text style={styles.featureText}>Get random task suggestions</Text>
         </View>
+        <View style={styles.featureItem}>
+          <View style={styles.dot} />
+          <Text style={styles.featureText}>Log time spent on tasks</Text>
+        </View>
       </View>
 
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.goBack()}
-      >
+      <Pressable style={styles.button} onPress={() => navigation.goBack()}>
         <Text style={styles.buttonText}>Back</Text>
       </Pressable>
     </View>
@@ -42,23 +43,23 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     paddingTop: 80,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FAFAF8",
   },
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#326273",
+    color: "#2D4A3E",
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 13,
-    color: "#5c9ead",
+    color: "#2D4A3E",
     marginBottom: 20,
   },
   sectionTitle: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#326273",
+    color: "#2D4A3E",
     marginBottom: 12,
   },
   featureList: {
@@ -74,14 +75,14 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: "#5c9ead",
+    backgroundColor: "#C1440E",
   },
   featureText: {
     fontSize: 14,
-    color: "#326273",
+    color: "#2D4A3E",
   },
   button: {
-    backgroundColor: "#326273",
+    backgroundColor: "#2D4A3E",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 999,
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   buttonText: {
-    color: "#ffffff",
+    color: "#FFFFFF",
     fontSize: 14,
     fontWeight: "600",
   },

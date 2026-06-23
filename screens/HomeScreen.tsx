@@ -59,16 +59,13 @@ export default function HomeScreen({ navigation }: any) {
     try {
       setLoadingActivity(true);
       setError("");
-
       const response = await fetch("https://bored-api.appbrewery.com/random");
       const data = await response.json();
-
       const newTask: Task = {
         id: Date.now().toString(),
         text: data.activity,
         completed: false,
       };
-
       const updatedTasks = [...tasks, newTask];
       setTasks(updatedTasks);
       saveTasks(updatedTasks);
@@ -97,7 +94,6 @@ export default function HomeScreen({ navigation }: any) {
 
   return (
     <View style={styles.container}>
-
       <View style={styles.header}>
         <View>
           <Text style={styles.title}>My To-Do List</Text>
@@ -118,23 +114,21 @@ export default function HomeScreen({ navigation }: any) {
         <TextInput
           style={styles.input}
           placeholder="Write a task..."
-          placeholderTextColor="#326273"
+          placeholderTextColor="#2D4A3E"
           value={input}
           onChangeText={setInput}
           multiline
         />
         {error ? <Text style={styles.errorText}>{error}</Text> : null}
-        <Pressable style={styles.button} onPress={addTask}>
+        <Pressable style={[styles.button, styles.addButton]} onPress={addTask}>
           <Text style={styles.buttonText}>Add Task</Text>
         </Pressable>
-
         <Pressable
-          style={styles.button}
+          style={[styles.button, styles.logButton]}
           onPress={() => navigation.navigate("LogTime")}
         >
           <Text style={styles.buttonText}>Log Time</Text>
         </Pressable>
-
         <Pressable
           style={[styles.button, styles.randomButton]}
           onPress={addRandomTask}
@@ -166,7 +160,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     paddingTop: 80,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FAFAF8",
   },
   header: {
     flexDirection: "row",
@@ -175,7 +169,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   aboutButton: {
-    backgroundColor: "#326273",
+    backgroundColor: "#2D4A3E",
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 999,
@@ -186,38 +180,38 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#326273",
+    color: "#2D4A3E",
     marginBottom: 4,
   },
   summary: {
     fontSize: 13,
-    color: "#326273",
+    color: "#2D4A3E",
   },
   sectionTitle: {
     fontSize: 13,
     fontWeight: "600",
     marginBottom: 8,
-    color: "#326273",
+    color: "#2D4A3E",
   },
   inputCard: {
-    backgroundColor: "#EBF4F6",
+    backgroundColor: "#EEF2EE",
     padding: 14,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#5c9ead",
+    borderColor: "#C8D8C8",
     marginBottom: 16,
   },
   input: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#5c9ead",
+    borderColor: "#C8D8C8",
     borderRadius: 999,
     paddingVertical: 12,
     paddingHorizontal: 16,
     fontSize: 14,
     minHeight: 44,
     textAlignVertical: "top",
-    color: "#326273",
+    color: "#2D4A3E",
     marginBottom: 10,
   },
   errorText: {
@@ -226,7 +220,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   button: {
-    backgroundColor: "#326273",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 999,
@@ -235,12 +228,18 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     minHeight: 44,
   },
+  addButton: {
+    backgroundColor: "#5A7A6A",
+  },
+  logButton: {
+    backgroundColor: "#2D4A3E",
+  },
   randomButton: {
-    backgroundColor: "#001F3F",
+    backgroundColor: "#C1440E",
     marginBottom: 0,
   },
   buttonText: {
-    color: "#ffffff",
+    color: "#FFFFFF",
     fontSize: 14,
     fontWeight: "600",
   },

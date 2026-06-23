@@ -30,7 +30,7 @@ export default function TaskCard({ text, completed, onToggle, onDelete }: TaskCa
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#EBF4F6",
+    backgroundColor: "#EEF2EE",
     borderRadius: 999,
     paddingVertical: 6,
     paddingHorizontal: 16,
@@ -39,6 +39,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     minHeight: 44,
+    borderWidth: 1,
+    borderColor: "#C8D8C8",
   },
   checkboxRow: {
     flexDirection: "row",
@@ -57,26 +59,26 @@ const styles = StyleSheet.create({
     height: 20,
     borderRadius: 10,
     borderWidth: 2,
-    borderColor: "#326273",
+    borderColor: "#2D4A3E",
     alignItems: "center",
     justifyContent: "center",
   },
   checkboxChecked: {
-    backgroundColor: "#326273",
-    borderColor: "#326273",
+    backgroundColor: "#C1440E",
+    borderColor: "#C1440E",
   },
   checkmark: {
-    color: "#ffffff",
+    color: "#FFFFFF",
     fontSize: 12,
     fontWeight: "bold",
   },
   taskText: {
-    color: "#326273",
+    color: "#2D4A3E",
     fontSize: 14,
     flexShrink: 1,
   },
   taskTextCompleted: {
-    color: "#4d6b73",
+    color: "#5A7A6A",
     textDecorationLine: "line-through",
   },
   deleteHitArea: {
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 4,
   },
   deleteText: {
-    color: "#b8472a",
+    color: "#C1440E",
     fontSize: 13,
     fontWeight: "600",
   },

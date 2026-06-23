@@ -39,22 +39,17 @@ export default function LogTimeScreen({ navigation }: any) {
       setError("Please enter a valid number of minutes.");
       return;
     }
-
     setError("");
-
     try {
       await fetch("https://dummyjson.com/posts/add", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           title: selectedTask.text,
           body: `Time spent: ${minutes} minutes`,
           userId: 1,
         }),
       });
-
       setMessage(`Log submitted! "${selectedTask.text}" took ${minutes} mins.`);
       setSelectedTask(null);
       setMinutes("");
@@ -79,23 +74,15 @@ export default function LogTimeScreen({ navigation }: any) {
         <Text style={styles.sectionTitle}>Select a task</Text>
         <ScrollView style={styles.taskList}>
           {tasks.length === 0 ? (
-            <Text style={styles.emptyText}>No tasks yet. New tasks can be added on the Home Screen.</Text>
+            <Text style={styles.emptyText}>No tasks yet. Add some on the Home Screen.</Text>
           ) : (
             tasks.map((task) => (
               <Pressable
                 key={task.id}
-                style={[
-                  styles.taskOption,
-                  selectedTask?.id === task.id && styles.taskOptionSelected,
-                ]}
+                style={[styles.taskOption, selectedTask?.id === task.id && styles.taskOptionSelected]}
                 onPress={() => setSelectedTask(task)}
               >
-                <Text
-                  style={[
-                    styles.taskOptionText,
-                    selectedTask?.id === task.id && styles.taskOptionTextSelected,
-                  ]}
-                >
+                <Text style={[styles.taskOptionText, selectedTask?.id === task.id && styles.taskOptionTextSelected]}>
                   {task.text}
                 </Text>
               </Pressable>
@@ -109,7 +96,7 @@ export default function LogTimeScreen({ navigation }: any) {
         <TextInput
           style={styles.input}
           placeholder="e.g. 30"
-          placeholderTextColor="#326273"
+          placeholderTextColor="#2D4A3E"
           value={minutes}
           onChangeText={setMinutes}
           keyboardType="numeric"
@@ -131,7 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
     paddingTop: 80,
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FAFAF8",
   },
   header: {
     flexDirection: "row",
@@ -142,15 +129,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "#326273",
+    color: "#2D4A3E",
     marginBottom: 4,
   },
   subtitle: {
     fontSize: 13,
-    color: "#5c9ead",
+    color: "#2D4A3E",
   },
   backButton: {
-    backgroundColor: "#326273",
+    backgroundColor: "#2D4A3E",
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 999,
@@ -161,15 +148,15 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#326273",
+    color: "#2D4A3E",
     marginBottom: 10,
   },
   inputCard: {
-    backgroundColor: "#EBF4F6",
+    backgroundColor: "#EEF2EE",
     padding: 14,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: "#5c9ead",
+    borderColor: "#C8D8C8",
     marginBottom: 16,
   },
   taskList: {
@@ -177,14 +164,14 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 14,
-    color: "#326273",
+    color: "#2D4A3E",
     paddingVertical: 8,
     paddingHorizontal: 4,
   },
   taskOption: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#5c9ead",
+    borderColor: "#C8D8C8",
     borderRadius: 999,
     paddingVertical: 10,
     paddingHorizontal: 16,
@@ -193,26 +180,26 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   taskOptionSelected: {
-    backgroundColor: "#326273",
-    borderColor: "#326273",
+    backgroundColor: "#2D4A3E",
+    borderColor: "#2D4A3E",
   },
   taskOptionText: {
     fontSize: 14,
-    color: "#326273",
+    color: "#2D4A3E",
   },
   taskOptionTextSelected: {
-    color: "#ffffff",
+    color: "#FFFFFF",
   },
   input: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#5c9ead",
+    borderColor: "#C8D8C8",
     borderRadius: 999,
     paddingVertical: 12,
     paddingHorizontal: 16,
     fontSize: 14,
     minHeight: 44,
-    color: "#326273",
+    color: "#2D4A3E",
   },
   errorText: {
     color: "#C0392B",
@@ -220,15 +207,17 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   successText: {
-    color: "#326273",
+    color: "#2D4A3E",
     fontSize: 13,
     marginBottom: 8,
-    backgroundColor: "#EBF4F6",
+    backgroundColor: "#EEF2EE",
+    borderLeftWidth: 4,
+    borderLeftColor: "#C1440E",
     padding: 12,
-    borderRadius: 12,
+    borderRadius: 8,
   },
   button: {
-    backgroundColor: "#326273",
+    backgroundColor: "#2D4A3E",
     paddingVertical: 12,
     paddingHorizontal: 20,
     borderRadius: 999,
@@ -237,7 +226,7 @@ const styles = StyleSheet.create({
     minHeight: 44,
   },
   buttonText: {
-    color: "#ffffff",
+    color: "#FFFFFF",
     fontSize: 14,
     fontWeight: "600",
   },
